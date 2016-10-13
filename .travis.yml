@@ -30,7 +30,7 @@ install:
       echo "modify guest MKD" | sudo tee -a /etc/ftpd.conf
       echo "modify guest RMD" | sudo tee -a /etc/ftpd.conf
       sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist
-      if [ "$LFTP_SUPPORT" -eq 1 ]; then brew install lftp; fi
+      if [ "$LFTP_SUPPORT" -eq 1 ]; then brew install homebrew/boneyard/lftp; fi
     fi
 
 before_script:
