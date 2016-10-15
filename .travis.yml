@@ -1,20 +1,24 @@
-#os:
+os:
   #- linux
-  #- osx
+  - osx
 
 matrix:
   include:
     - os: osx
+      sudo: required
       osx_image: xcode8
     - os: osx
+      sudo: required
       osx_image: xcode7
     - os: osx
+      sudo: required
       osx_image: xcode6.4
     - os: osx
+      sudo: required
       osx_image: xcode6.2
 
 env:
-  - LFTP_SUPPORT=1
+  #- LFTP_SUPPORT=1
   - LFTP_SUPPORT=0
 
 language: sh
