@@ -28,6 +28,8 @@ install:
       #echo "modify guest RMD" | sudo tee -a /etc/ftpd.conf
       #sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist
       brew install vsftpd
+      ls -la
+      ls -la */
       which vsftpd
       vsftpd tests/vsftpd.conf &
       if [ "$LFTP_SUPPORT" -eq 1 ]; then brew install lftp; fi
