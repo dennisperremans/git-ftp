@@ -1,4 +1,5 @@
 os:
+  - linux
   - osx
 
 env:
@@ -11,25 +12,12 @@ install:
   - sudo chmod a+rwx /var/ftp/pub
   - >
     if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-      wget https://security.appspot.com/downloads/vsftpd-3.0.3.tar.gz
-      tar xzf vsftpd-3.0.3.tar.gz
-      cd vsftpd-3.0.3
-      make
-      mkdir -p /tmp/vsftpd/empty
-      mkdir /tmp/ftp
-      ./vsftpd ../tests/vsftpd.conf &
-      cd ..
+      ./tests/vsftpd-3.0.3.debian7 tests/vsftpd.conf &
       if [ "$LFTP_SUPPORT" -eq 1 ]; then sudo apt-get install -y lftp; fi
     fi
   - >
     if [ "$TRAVIS_OS_NAME" = "osx" ]; then
-      #echo "chroot GUEST /var/ftp" | sudo tee -a /etc/ftpd.conf
-      #echo "modify guest MKD" | sudo tee -a /etc/ftpd.conf
-      #echo "modify guest RMD" | sudo tee -a /etc/ftpd.conf
-      #sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist
-      brew install vsftpd
-      ls -la /usr/local/Cellar/vsftpd/3.0.3
-      /usr/local/Cellar/vsftpd/3.0.3/sbin/vsftpd tests/vsftpd.conf &
+      ./tests/vsftpd-3.0.3.el_capitan-3.0.3.el_capitan tests/vsftpd.conf &
       if [ "$LFTP_SUPPORT" -eq 1 ]; then brew install lftp; fi
     fi
 
@@ -50,4 +38,3 @@ after_failure:
   - cat /tmp/ftp.log
   - ls -la /tmp/ftp/*
   - ls -la /tmp/ftp/pub/*
-  #- ls -la /var/ftp/pub/*
