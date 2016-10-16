@@ -29,7 +29,7 @@ install:
       #sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist
       brew install vsftpd
       ls -la /usr/local/Cellar/vsftpd/3.0.3
-      /usr/local/Cellar/vsftpd/3.0.3/vsftpd tests/vsftpd.conf &
+      /usr/local/Cellar/vsftpd/3.0.3/sbin/vsftpd tests/vsftpd.conf &
       if [ "$LFTP_SUPPORT" -eq 1 ]; then brew install lftp; fi
     fi
 
