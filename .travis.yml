@@ -33,7 +33,7 @@ install:
 before_script:
   - git config --global user.email "you@example.com"
   - git config --global user.name "Your Name"
-  - export GIT_FTP_ROOT=ftp://localhost:2121/pub
+  - export GIT_FTP_ROOT=ftp://localhost:2121/pub/
   - export GIT_FTP_USER=ftp
   - export GIT_FTP_PASSWD=ftp
   - export TEST_CASES=test_inits
@@ -44,5 +44,7 @@ script:
   - tests/git-ftp-test.sh
 
 after_failure:
+  - cat /tmp/ftp.log
+  - cat /tmp/vsftpd-xfer.log
   - ls -la /tmp/ftp/*
   - ls -la /var/ftp/pub/*
