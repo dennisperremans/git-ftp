@@ -25,6 +25,8 @@ install:
   - >
     if [ "$TRAVIS_OS_NAME" = "osx" ]; then
       sudo cp /etc/ftpd.conf.default /etc/ftpd.conf
+      sudo dscl . -create /Users/ftp
+      sudo dscl . -create /Users/ftp NFSHomeDirectory /var/ftp
       echo "chroot GUEST /var/ftp" | sudo tee -a /etc/ftpd.conf
       echo "modify guest on" | sudo tee -a /etc/ftpd.conf
       echo "modify guest MKD" | sudo tee -a /etc/ftpd.conf
