@@ -854,6 +854,8 @@ disabled_test_file_named_dash() {
 }
 
 remote_file_exists() {
+	echo Testing: curl "$CURL_URL/$1" --head
+	curl "$CURL_URL/$1" --head
 	curl "$CURL_URL/$1" --head > /dev/null
 }
 
