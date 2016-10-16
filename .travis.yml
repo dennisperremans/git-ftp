@@ -24,6 +24,7 @@ install:
     fi
   - >
     if [ "$TRAVIS_OS_NAME" = "osx" ]; then
+      sudo cp /etc/ftpd.conf.default /etc/ftpd.conf
       echo "chroot GUEST /var/ftp" | sudo tee -a /etc/ftpd.conf
       echo "modify guest MKD" | sudo tee -a /etc/ftpd.conf
       echo "modify guest RMD" | sudo tee -a /etc/ftpd.conf
@@ -43,6 +44,7 @@ script:
   - ls -la /etc/
   - sudo cat /etc/ftpd.conf
   - ps ax
+  - curl ftp://localhost/
 
 after_failure:
   - ls -la /var/ftp/pub/*
