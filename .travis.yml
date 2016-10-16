@@ -39,6 +39,8 @@ before_script:
   - export TEST_CASES=test_inits
 
 script:
+  - curl -v -T INSTALL.md "$GIT_FTP_ROOT"
+  - curl -v "$GIT_FTP_ROOT"
   - tests/git-ftp-test.sh
 
 after_failure:
