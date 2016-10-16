@@ -26,8 +26,11 @@ install:
     if [ "$TRAVIS_OS_NAME" = "osx" ]; then
       sudo cp /etc/ftpd.conf.default /etc/ftpd.conf
       echo "chroot GUEST /var/ftp" | sudo tee -a /etc/ftpd.conf
+      echo "modify guest on" | sudo tee -a /etc/ftpd.conf
       echo "modify guest MKD" | sudo tee -a /etc/ftpd.conf
       echo "modify guest RMD" | sudo tee -a /etc/ftpd.conf
+      #echo "modify guest off" | sudo tee -a /etc/ftpd.conf
+      echo "upload guest on" | sudo tee -a /etc/ftpd.conf
       sudo rm /etc/ftpusers
       sudo touch /etc/ftpusers
       echo "ftp allow" | sudo tee -a /etc/ftpusers
@@ -47,8 +50,8 @@ script:
   - cat /usr/share/ftpd/examples/*
   - sudo cat /etc/ftpd.conf
   - sudo cat /etc/ftpusers
-  - curl ftp://localhost/
-  - curl ftp://localhost/pub
+  - curl -v ftp://localhost/
+  - curl -v ftp://localhost/pub
 
 after_failure:
   - ls -la /var/ftp/pub/*
