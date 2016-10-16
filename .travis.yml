@@ -39,8 +39,10 @@ before_script:
   - export GIT_FTP_PASSWD=ftp
 
 script:
+  - env
+  - ls -la /etc/
   - sudo cat /etc/ftpd.conf
-  - ps fax
+  - ps ax
 
 after_failure:
   - ls -la /var/ftp/pub/*
