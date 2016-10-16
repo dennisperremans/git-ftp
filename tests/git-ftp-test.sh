@@ -93,7 +93,8 @@ test_prints_version() {
 }
 
 test_inits() {
-	init=$($GIT_FTP init)
+	#init=$($GIT_FTP init)
+	$GIT_FTP -vv init
 	assertEquals 0 $?
 	assertTrue 'file does not exist' "remote_file_exists 'test 1.txt'"
 	assertTrue 'file differs' "remote_file_equals 'test 1.txt'"

@@ -39,7 +39,7 @@ before_script:
   - export TEST_CASES=test_inits
 
 script:
-  - curl -v -T INSTALL.md "$GIT_FTP_ROOT"
+  - curl -v --ftp-create-dirs -T INSTALL.md "$GIT_FTP_ROOT"
   - curl -v "$GIT_FTP_ROOT"
   - tests/git-ftp-test.sh
 
@@ -47,4 +47,5 @@ after_failure:
   - cat /tmp/ftp.log
   - cat /tmp/vsftpd-xfer.log
   - ls -la /tmp/ftp/*
-  - ls -la /var/ftp/pub/*
+  - ls -la /tmp/ftp/pub/*
+  #- ls -la /var/ftp/pub/*
