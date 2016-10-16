@@ -28,6 +28,8 @@ install:
       echo "chroot GUEST /var/ftp" | sudo tee -a /etc/ftpd.conf
       echo "modify guest MKD" | sudo tee -a /etc/ftpd.conf
       echo "modify guest RMD" | sudo tee -a /etc/ftpd.conf
+      sudo rm /etc/ftpusers
+      sudo touch /etc/ftpusers
       echo "ftp allow" | sudo tee -a /etc/ftpusers
       echo "anonymous allow" | sudo tee -a /etc/ftpusers
       sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist
@@ -42,12 +44,11 @@ before_script:
   - export GIT_FTP_PASSWD=ftp
 
 script:
-  - ls -la /usr/share/ftpd/examples/
   - cat /usr/share/ftpd/examples/*
-  - ls -la /etc/
   - sudo cat /etc/ftpd.conf
   - sudo cat /etc/ftpusers
   - curl ftp://localhost/
+  - curl ftp://localhost/pub
 
 after_failure:
   - ls -la /var/ftp/pub/*
