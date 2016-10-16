@@ -28,6 +28,7 @@ install:
       echo "chroot GUEST /var/ftp" | sudo tee -a /etc/ftpd.conf
       echo "modify guest MKD" | sudo tee -a /etc/ftpd.conf
       echo "modify guest RMD" | sudo tee -a /etc/ftpd.conf
+      sudo cp /etc/ftpd.conf /etc/ftpd.conf.default
       sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist
       if [ "$LFTP_SUPPORT" -eq 1 ]; then brew install lftp; fi
     fi
