@@ -10,7 +10,7 @@ install:
   - sudo mkdir -p /var/ftp/pub
   - sudo chmod a+rwx /var/ftp/pub
   - >
-    if [ "$TRAVIS_OS_NAME" = "osx" ]; then
+    if [ "$TRAVIS_OS_NAME" = "linux" ]; then
       wget https://security.appspot.com/downloads/vsftpd-3.0.3.tar.gz
       tar xzf vsftpd-3.0.3.tar.gz
       cd vsftpd-3.0.3
@@ -22,11 +22,14 @@ install:
       if [ "$LFTP_SUPPORT" -eq 1 ]; then sudo apt-get install -y lftp; fi
     fi
   - >
-    if [ "$TRAVIS_OS_NAME" = "osxx" ]; then
-      echo "chroot GUEST /var/ftp" | sudo tee -a /etc/ftpd.conf
-      echo "modify guest MKD" | sudo tee -a /etc/ftpd.conf
-      echo "modify guest RMD" | sudo tee -a /etc/ftpd.conf
-      sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist
+    if [ "$TRAVIS_OS_NAME" = "osx" ]; then
+      #echo "chroot GUEST /var/ftp" | sudo tee -a /etc/ftpd.conf
+      #echo "modify guest MKD" | sudo tee -a /etc/ftpd.conf
+      #echo "modify guest RMD" | sudo tee -a /etc/ftpd.conf
+      #sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist
+      brew install vsftpd
+      which vsftpd
+      vsftpd tests/vsftpd.conf &
       if [ "$LFTP_SUPPORT" -eq 1 ]; then brew install lftp; fi
     fi
 
