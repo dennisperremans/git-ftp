@@ -1,9 +1,7 @@
 os:
-  - linux
   - osx
 
 env:
-  - LFTP_SUPPORT=1
   - LFTP_SUPPORT=0
 
 language: sh
@@ -41,7 +39,8 @@ before_script:
   - export GIT_FTP_PASSWD=ftp
 
 script:
-  - tests/git-ftp-test.sh
+  - sudo cat /etc/ftpd.conf
+  - ps fax
 
 after_failure:
   - ls -la /var/ftp/pub/*
