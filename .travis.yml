@@ -1,16 +1,15 @@
 os:
   - linux
-  - osx
+#  - osx
 
 env:
   - LFTP_SUPPORT=0
-  - LFTP_SUPPORT=1
+#  - LFTP_SUPPORT=1
 
 language: sh
 
 install:
-  - sudo mkdir -p /var/ftp/pub
-  - sudo chmod a+rwx /var/ftp/pub
+  - mkdir -p /tmp/ftp/pub
   - >
     if [ "$TRAVIS_OS_NAME" = "linux" ]; then
       ./tests/vsftpd-3.0.3.debian7 tests/vsftpd.conf &
