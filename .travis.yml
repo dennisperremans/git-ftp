@@ -12,7 +12,15 @@ install:
   - mkdir -p /tmp/ftp/pub
   - >
     if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-      ./tests/vsftpd-3.0.3.debian7 tests/vsftpd.conf &
+       wget https://security.appspot.com/downloads/vsftpd-3.0.3.tar.gz
+       tar xzf vsftpd-3.0.3.tar.gz
+       cd vsftpd-3.0.3
+       make
+       mkdir -p /tmp/vsftpd/empty
+       mkdir /tmp/ftp
+       ./vsftpd ../tests/vsftpd.conf &
+       cd ..
+      #./tests/vsftpd-3.0.3.debian7 tests/vsftpd.conf &
       if [ "$LFTP_SUPPORT" -eq 1 ]; then sudo apt-get install -y lftp; fi
     fi
   - >
@@ -29,11 +37,12 @@ before_script:
   - export GIT_FTP_ROOT=pub
   - export GIT_FTP_USER=ftp
   - export GIT_FTP_PASSWD=ftp
-  #- export TEST_CASES=test_inits
+  - export TEST_CASES="test inits test_init_fails"
 
 script:
   - tests/git-ftp-test.sh
 
 after_failure:
   - cat /tmp/ftp.log
+  - ls -la /tmp/ftp/pub
   - ls -la /tmp/ftp/pub/*
