@@ -108,7 +108,6 @@ test_init_fails() {
 	assertEquals 5 $?
 	error_count=$(echo "$init" | grep -F 'Access denied' | wc -l)
 	assertEquals 1 $error_count
-	echo "$init"
 }
 
 test_inits_and_pushes() {

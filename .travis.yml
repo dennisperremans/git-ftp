@@ -37,10 +37,12 @@ before_script:
   - export GIT_FTP_ROOT=pub
   - export GIT_FTP_USER=ftp
   - export GIT_FTP_PASSWD=ftp
-  - export TEST_CASES="test inits test_init_fails"
+  - export TEST_CASES="test_inits test_init_fails"
 
 script:
   - tests/git-ftp-test.sh
+  - curl ftp://localhost:2121/
+  - curl -vvv -u wrong_user:wrong_pw ftp://localhost:2121/
 
 after_failure:
   - cat /tmp/ftp.log
