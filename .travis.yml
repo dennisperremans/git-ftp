@@ -4,7 +4,7 @@ os:
 
 env:
   - LFTP_SUPPORT=0
-#  - LFTP_SUPPORT=1
+  - LFTP_SUPPORT=1
 
 language: sh
 
@@ -19,7 +19,7 @@ install:
   - >
     if [ "$TRAVIS_OS_NAME" = "osx" ]; then
       ./tests/vsftpd-3.0.3.el_capitan tests/vsftpd.conf &
-      if [ "$LFTP_SUPPORT" -eq 1 ]; then brew install lftp; fi
+      if [ "$LFTP_SUPPORT" -eq 1 ]; then brew install homebrew/boneyard/lftp; fi
     fi
 
 before_script:
