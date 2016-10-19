@@ -1,6 +1,6 @@
 os:
   - linux
-#  - osx
+  - osx
 
 env:
   - LFTP_SUPPORT=0
