@@ -160,6 +160,8 @@ test_push_nothing() {
 	git commit -a -m "change" > /dev/null 2>&1
 	push=$($GIT_FTP push --dry-run)
 	assertEquals 0 $?
+	git status
+	ls -la
 	assertTrue "$push" "echo \"$push\" | grep '1 file to sync:'"
 	echo 'test 1.txt' >> .git-ftp-ignore
 	push=$($GIT_FTP push)

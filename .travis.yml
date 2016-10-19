@@ -1,10 +1,10 @@
 os:
-  - linux
+  #- linux
   - osx
 
 env:
   - LFTP_SUPPORT=0
-  - LFTP_SUPPORT=1
+  #- LFTP_SUPPORT=1
 
 language: sh
 
@@ -30,11 +30,10 @@ before_script:
   - export GIT_FTP_ROOT=pub
   - export GIT_FTP_USER=ftp
   - export GIT_FTP_PASSWD=ftp
-  #- export TEST_CASES="test_inits test_init_fails"
+  - export TEST_CASES="test_inits test_push_nothing test_file_with_unicode"
 
 script:
   - tests/git-ftp-test.sh
-  - curl -vvv -u wrong:wrong ftp://localhost:2121/ || echo "Curl failed with $?"
 
 after_failure:
   - cat /tmp/ftp.log
