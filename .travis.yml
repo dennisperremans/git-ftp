@@ -9,17 +9,10 @@ env:
 language: sh
 
 install:
+  - mkdir -p /tmp/vsftpd/empty
   - mkdir -p /tmp/ftp/pub
   - >
     if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-      #wget https://security.appspot.com/downloads/vsftpd-3.0.3.tar.gz
-      #tar xzf vsftpd-3.0.3.tar.gz
-      #cd vsftpd-3.0.3
-      #make
-      #mkdir -p /tmp/vsftpd/empty
-      #mkdir /tmp/ftp
-      #./vsftpd ../tests/vsftpd.conf &
-      #cd ..
       ./tests/vsftpd-3.0.3.debian7 tests/vsftpd.conf &
       if [ "$LFTP_SUPPORT" -eq 1 ]; then sudo apt-get install -y lftp; fi
     fi
