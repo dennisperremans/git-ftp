@@ -34,6 +34,7 @@ before_script:
 
 script:
   - tests/git-ftp-test.sh
+  - curl -vvv -u wrong:wrong ftp://localhost:2121/ || echo "Curl failed with $?"
 
 after_failure:
   - cat /tmp/ftp.log
