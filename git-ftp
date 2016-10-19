@@ -695,8 +695,14 @@ handle_file_sync() {
 	sort -z -u -o "$TMP_GITFTP_DELETE" "$TMP_GITFTP_DELETE"
 	# Calculate total file count
 	local DONE_ITEMS=0
+	echo "file lists:"
+	cat "$TMP_GITFTP_UPLOAD" "$TMP_GITFTP_DELETE"
+	echo "file lists with NULL:"
+	cat "$TMP_GITFTP_UPLOAD" "$TMP_GITFTP_DELETE" | sed "s/[\x00]/NULL/g"
 	local TOTAL_ITEMS=$(cat "$TMP_GITFTP_UPLOAD" "$TMP_GITFTP_DELETE" | sed "s/[^\x00]//g" |wc -c)
+	echo "wc null byte count: $TOTAL_ITEMS"
 	TOTAL_ITEMS=$((TOTAL_ITEMS+0)) # trims whitespaces produced by wc
+	echo "wc null byte count after trim: $TOTAL_ITEMS"
 	print_info "$TOTAL_ITEMS file$([ $TOTAL_ITEMS -ne 1 ] && echo 's') to sync:"
 
 	while IFS= read -r -d '' FILE_NAME; do

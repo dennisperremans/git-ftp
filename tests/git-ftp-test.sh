@@ -628,6 +628,8 @@ test_file_with_nonchar() {
 # issue #209
 test_file_with_unicode() {
 	supports_unicode || startSkipping
+	# TODO: Get this working on MacOS if possible with curl
+	[ "$TRAVIS_OS_NAME" = "osx" ] && startSkipping
 	file1='umlaut_ä.md'
 	file1enc='umlaut_%C3%A4.md'
 	echo 'content' > "$file1"
